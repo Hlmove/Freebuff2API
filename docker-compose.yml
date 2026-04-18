@@ -18,7 +18,7 @@ services:
       # 【可选】请求超时时间
       - REQUEST_TIMEOUT=15m
       # 【可选】你的客户端（或 NewAPI）访问此服务时需要提供的 API Key，多个用逗号分隔。如果不填，则无需鉴权。
-      # - API_KEYS=sk-your_custom_key
+      - API_KEYS=sk-123321
       # 【可选】请求 Freebuff 时使用的 HTTP 代理（如果在国内需要科学上网，可配置此项）
       # - HTTP_PROXY=http://127.0.0.1:7890
     
