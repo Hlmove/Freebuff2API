@@ -2,29 +2,24 @@ version: '3.8'
 
 services:
   freebuff2api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    # 如果你想直接使用预构建的官方镜像，请取消注释下方的 image，并注释掉上方的 build 部分
-    # image: ghcr.io/quorinex/freebuff2api:latest
+    image: ghcr.io/quorinex/freebuff2api:latest
     container_name: freebuff2api
     ports:
       - "8080:8080"
     environment:
-      # 在这里填入你的 Auth Tokens，多个 Token 请用逗号分隔
+      # 【必填】在这里填入你的 Freebuff Auth Tokens，多个 Token 请用逗号分隔
       - AUTH_TOKENS=your_token_here
-      # 可选配置项（已提供默认值，可根据需要取消注释并修改）
-      # - LISTEN_ADDR=:8080
-      # - UPSTREAM_BASE_URL=https://codebuff.com
-      # - ROTATION_INTERVAL=6h
-      # - REQUEST_TIMEOUT=15m
-      # - API_KEYS=your_api_key_1,your_api_key_2
+      # 【可选】修改监听端口（容器内端口）
+      - LISTEN_ADDR=:8080
+      # 【可选】上游 Freebuff 接口地址
+      - UPSTREAM_BASE_URL=https://codebuff.com
+      # 【可选】Token 自动轮换间隔
+      - ROTATION_INTERVAL=6h
+      # 【可选】请求超时时间
+      - REQUEST_TIMEOUT=15m
+      # 【可选】你的客户端（或 NewAPI）访问此服务时需要提供的 API Key，多个用逗号分隔。如果不填，则无需鉴权。
+      # - API_KEYS=sk-your_custom_key
+      # 【可选】请求 Freebuff 时使用的 HTTP 代理（如果在国内需要科学上网，可配置此项）
       # - HTTP_PROXY=http://127.0.0.1:7890
-    
-    # 如果你更倾向于使用配置文件而不是环境变量，可以取消下面 volumes 的注释，
-    # 并在本地目录准备好 config.json 文件
-    # volumes:
-    #   - ./config.json:/config.json
-    # command: ["-config", "/config.json"]
     
     restart: unless-stopped
