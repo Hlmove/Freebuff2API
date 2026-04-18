@@ -23,3 +23,9 @@ services:
       # - HTTP_PROXY=http://127.0.0.1:7890
     
     restart: unless-stopped
+    networks:
+      - baota_net
+
+networks:
+  baota_net:
+    external: true
